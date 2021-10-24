@@ -8,15 +8,16 @@ time.sleep(2)
 try:
     ser.isOpen()
     print("Serial port is open")
+    ser.write(str.encode("on"))
 except:
     print("Error")
     exit()
 
-if(ser.isOpen()):
-    try:
-        while(1):
-            line = ser.readline()
-            decodeInput = line.decode('utf-8')
-            print(decodeInput)
-    except:
-        print("Error")
+# if(ser.isOpen()):
+#     try:
+#         while(1):
+#             line = ser.readline()
+#             decodeInput = line.decode('utf-8')
+#             print(decodeInput)
+#     except:
+#         print("Error")
