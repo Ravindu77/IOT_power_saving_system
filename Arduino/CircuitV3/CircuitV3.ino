@@ -71,10 +71,10 @@ void readSerial(){
 
 void tempControl(){
   //delay(1000);
-  if(( idealTemp < temperature)){
+  if(( idealTemp > temperature)){
     heaterOn();
   }
-  if( idealTemp > temperature){
+  if( idealTemp < temperature){
     acOn();
   }
   if(idealTemp == temperature){

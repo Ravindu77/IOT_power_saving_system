@@ -5,10 +5,21 @@ port = 'COM5'
 ser = serial.Serial(port, 9600)
 time.sleep(2)
 
+msg = 22
+
+def setTemp(temp):
+    ser.write(str.encode(temp))
+
+def setAuto():
+    ser.write(str.encode("on"))
+
 try:
     ser.isOpen()
-    print("Serial port is open")
-    ser.write(str.encode("on"))
+    print("Serial port is open ")
+    print("On")
+    setAuto()
+    print(msg)
+    setTemp(msg)
 except:
     print("Error")
     exit()

@@ -16,15 +16,15 @@ myAWSIoTMQTTClient.configureCredentials(PATH_TO_ROOT, PATH_TO_KEY, PATH_TO_CERT)
 
 #myAWSIoTMQTTClient.connect()
 
-# try:
-#     myAWSIoTMQTTClient.connect()
-#     print("connected")
-#     myAWSIoTMQTTClient.publish("publish-topic", "Hello World", 1)
-#     #myAWSIoTMQTTClient.publish("<topic> (e.g. topic/test)", data, 1)
-#     myAWSIoTMQTTClient.disconnect()
-# except:
-#     print("Failed to connect")
-#     exit()
+try:
+    myAWSIoTMQTTClient.connect()
+    print("connected")
+    myAWSIoTMQTTClient.publish("subscribe-topic", "Hello World", 1)
+    #myAWSIoTMQTTClient.publish("<topic> (e.g. topic/test)", data, 1)
+    myAWSIoTMQTTClient.disconnect()
+except:
+    print("Failed to connect")
+    exit()
 
 myAWSIoTMQTTClient.connect()
 #print("connected")
