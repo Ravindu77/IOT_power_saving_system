@@ -63,9 +63,22 @@ void readSerial(){
     msg = Serial.readString();
     if(msg == "on"){
       pushB = true;
-    } else{
-      idealTemp = msg.toFloat();
+    }else if(msg == "off"){
+      pushB = false;
     }
+      else{
+      idealTemp = inputTempCheck(msg);
+    }
+  }
+}
+
+float inputTempCheck(String msg){
+  float temp = msg.toFloat();
+
+  if((temp <= 40) && (temp >= 10)){
+    return temp;
+  }else{
+    return idealTemp;
   }
 }
 
