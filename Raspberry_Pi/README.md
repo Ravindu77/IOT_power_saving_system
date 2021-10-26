@@ -2,7 +2,7 @@
 
 # Raspberry Pi
 
-#
+# libraries 
     pip install AWSIoTPythonSDK
     python -m pip install pyserial
     pip install threaded
@@ -46,14 +46,14 @@
 
 
 # Threads
-    serialListner
-        ClientID: Client01
-        Topics: readings-topic, power-topic, tempChange-topic
-        Purpouse: Purpouse of this function is to run as an active serial listner thread
+    #serialListner
+        #ClientID: Client01
+        #Topics: readings-topic, power-topic, tempChange-topic
+        #Purpouse: Purpouse of this function is to run as an active serial listner thread
 
-    mqttListner
-        ClientID: Client02
-        Topics:publish-topic
+    #mqttListner
+        #ClientID: Client02
+        #Topics:publish-topic
 
-    cliHandler
-        Purpouse: Two threads I mentioned above uses while loop with a coundition check to run this function let developer to give a keyboard input to distrupt threads by changing the condition to false
+    #cliHandler
+        #Purpouse: Two threads I mentioned above uses while loop with a coundition check to run #this function let developer to give a keyboard input to distrupt threads by changing #the condition to false
