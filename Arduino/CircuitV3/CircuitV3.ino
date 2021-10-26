@@ -149,14 +149,18 @@ void tempChange(){
     if(idealTemp < 40){
       idealTemp++;
     }
-    Serial.println(idealTemp);
+    Serial.print(idealTemp);
+    Serial.print( " " );
+    Serial.println("");
   }
   if(button(minusState, minus)){
     delay(500);
     if(idealTemp > 10){
       idealTemp--;
     }
-    Serial.println(idealTemp);
+    Serial.print(idealTemp);
+    Serial.print( " " );
+    Serial.println("");
   }
 }
 
@@ -207,6 +211,7 @@ void readTempHumid(){
     Serial.print( " " );
     Serial.print( "Humid: " );
     Serial.print( humidity, 1 );
-    Serial.println("%");
+    Serial.print( " " );
+    Serial.println("");
   }
 }
