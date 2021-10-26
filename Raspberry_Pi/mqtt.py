@@ -16,6 +16,7 @@ myAWSIoTMQTTClient.configureCredentials(PATH_TO_ROOT, PATH_TO_KEY, PATH_TO_CERT)
 
 #myAWSIoTMQTTClient.connect()
 
+
 try:
     myAWSIoTMQTTClient.connect()
     print("connected")
