@@ -7,6 +7,9 @@
 <h2>Raspberry Pi (Ravindu)</h2>
     For more information: https://github.com/Ravindu77/IOT_power_saving_system/blob/main/Raspberry_Pi/README.md
 
+<h2>sqlConnect (Ravindu)</h2>
+    For more information: https://github.com/Ravindu77/IOT_power_saving_system/blob/main/SQL_connector/README.md
+
 <h2>Web (Lee)</h2>
     
 
