@@ -29,6 +29,7 @@ def setTemp(msg):
         if int(msg) <= 40 and int(msg) >= 10:
             serialWrite(msg)
             print("Set temperature: " + msg)
+            q.put(msg)
         else:
             print("ERROR: Invalid temperature enter between 10 and 40")
     else:
@@ -39,19 +40,19 @@ def onOffArduino(msg):
     if msg == "on":
         serialWrite("on")
         print("Status: " + msg )
+        q.put(msg)
     elif msg == "off":
         serialWrite("off")
         print("Status: " + msg )
+        q.put(msg)
     else:
         print("ERROR: Invalid input")
 
 def sortMsg(msg):
     if "on" == msg or "off" == msg:
         onOffArduino(msg)
-        q.put(msg)
     elif msg.isnumeric():
         setTemp(msg)
-        q.put(msg)
     else:
         print("ERROR: Invalid input from sortMsg")
 
