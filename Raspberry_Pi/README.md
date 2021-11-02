@@ -54,6 +54,13 @@
     #mqttListner
         #ClientID: Client02
         #Topics:publish-topic
+        #Purpouse: Purpouse of this function is to function is to 
+    
+    #internalQueueReader
+        #ClientID: Client03
+        #Topics:publish-topic
+        #Purpouse: Purpouse of this function is to read the messges store in queue and publish it to topics
+        #Why do you need to read queue: When a message comes from the web socket it needs to strore it's current status like "on/off or Temp change"
 
     #cliHandler
         #Purpouse: Two threads I mentioned above uses while loop with a coundition check to run #this function let developer to give a keyboard input to distrupt threads by changing #the condition to false
