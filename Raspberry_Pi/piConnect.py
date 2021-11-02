@@ -107,11 +107,13 @@ def splitDecodeInput(decodeInput, date, client):
         if check_float(temp):
             jsonStr = tempChangeToJson(temp, date)
             #client.publish("readings-topic", jsonStr, 1)
-            client.publish("power-topic", jsonStr, 1)
+            #tempChange-topic
+            client.publish("tempChange-topic", jsonStr, 1)
         else:
             jsonStr = powerToJson(temp, date)
             #client.publish("readings-topic", jsonStr, 1)
-            client.publish("tempChange-topic", jsonStr, 1)
+            #power-topic
+            client.publish("power-topic", jsonStr, 1)
     
 #json translation
 def readingsToJson(splitInput, date):
