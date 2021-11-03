@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Automation ENERGY-SAVING</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="dist/gauges.min.css">
+<link rel="stylesheet" href="dist/app.min.css">
+<link rel="stylesheet" type="text/css" href="example.css">
+<link rel="stylesheet" type="text/css" href="switch.css">
+<script src="aws-iot-sdk-browser-bundle.js"></script>
+<script src="bundle.js"></script>
+<script src="home.js"></script>
+</head>
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+<body class="w3-black">
+
+<div class="spacer" id="spacer"></div>
+<div class="block" id="connecting-div" style="visibility:visible"></div>
+   
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <img src="./image/swin_logo.png" style="width:100%">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME SYSTEM</p>
+  </a>
+  <a href="#air" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-snowflake-o w3-xxlarge"></i>
+    <p>Temperature control</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#air" class="w3-bar-item w3-button" style="width:25% !important">Temp control</a>
+  </div>
+</div>
+
+<!-- Page Contents -->
+<div class="w3-padding-large" id="main">
+  <!-- Home Section -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h3 class="w3-jumbo"><span class="w3-hide-small"></span>Power-saving System</h3>
+    <p>Ravindu Jayasankha Perera Hetti Arachchige, Li Guan, Heath Legg</p>
+    <img src="./image/home_logo.jpg" alt="home" class="w3-image" width="350" height="350">
+  </header>
+  <!-- End Home Section -->
+
+  <!-- Air Condition Section -->
+  <div class="w3-padding-64 w3-content w3-text-grey" id="air">
+    <h2 class="w3-text-light-grey">Temperature control system</h2>
+    <hr style="width:200px" class="w3-opacity">
+   
+    <!-- Grid for temperature/humidity tables -->
+    <h3 class="w3-padding-16 w3-text-light-grey">Temperature/Humidity</h3>
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-one w3-margin-bottom">
+        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-dark-grey w3-xlarge w3-padding-32">Celsius/Humidity</li>
+          <li class="w3-padding-16">
+            <h2 class="inline"><div id="temp-div"></div><div id="humid-div"></div></h2>
+            <span class="w3-opacity"><div id="date-div"></div></span>
+        </ul>
+      </div>
+    <!-- End temperature/humidity tables -->
+    </div>
+	
+   <!-- On and off button-->
+    <div class="w3-section">
+      <p> <strong>Auto:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      <div id="settings-div">
+		
+		 <label class="switch">
+             <input type="checkbox" value="false" id="publish-data" name="publish-data" onclick="updatePublishData()">
+             <span class="slider round"></span>
+         </label>
+      </div>
+	    
+	  </p>
+    </div>
+    <!-- End of On and off button -->
+	
+    <div class="w3-section">
+      <p> <strong>Increase/decrease:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+	     <button class="w3-button w3-light-grey w3-padding-small" type="submit"> + </button> 
+	     <button class="w3-button w3-light-grey w3-padding-small" type="submit"> - </button> 
+	  </p>
+    </div>
+	
+	<div id="explorer-div" style="visibility:hidden">
+	     <div id="settings-div">
+         <p><strong>Select your ideal temperature:</strong><input type="text" name="publish-data1" id="publish-data1" placeholder="10-40°C" maxlength="2" size="4" onchange="updatePublishData()" required name=""/></p>
+		 </div> 
+    </div>
+  
+
+  <!-- End Air Condition Section -->
+  </div>
+ 
+  <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <i class="fa fa-github w3-hover-opacity"> <a href="https://github.com/Ravindu77/IOT_power_saving_system/tree/Test_Branch" target="_blank" class="w3-hover-text-green">GitHub page</a></i>
+    <p class="w3-medium">SWE30012-IoT Launcher Project</p>
+  <!-- End footer -->
+  </footer>
+
+<!-- END CONTENTS -->
+</div>
+
+
+   
+</body>
+</html>
