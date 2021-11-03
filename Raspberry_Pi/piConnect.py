@@ -29,6 +29,7 @@ def setTemp(msg):
         if int(msg) <= 40 and int(msg) >= 10:
             serialWrite(msg)
             print("Set temperature: " + msg)
+            q.put(msg)
         else:
             print("ERROR: Invalid temperature enter between 10 and 40")
     else:
@@ -39,9 +40,11 @@ def onOffArduino(msg):
     if msg == "on":
         serialWrite("on")
         print("Status: " + msg )
+        q.put(msg)
     elif msg == "off":
         serialWrite("off")
         print("Status: " + msg )
+        q.put(msg)
     else:
         print("ERROR: Invalid input")
 
@@ -105,11 +108,13 @@ def splitDecodeInput(decodeInput, date, client):
         if check_float(temp):
             jsonStr = tempChangeToJson(temp, date)
             #client.publish("readings-topic", jsonStr, 1)
-            client.publish("power-topic", jsonStr, 1)
+            #tempChange-topic
+            client.publish("tempChange-topic", jsonStr, 1)
         else:
             jsonStr = powerToJson(temp, date)
             #client.publish("readings-topic", jsonStr, 1)
-            client.publish("tempChange-topic", jsonStr, 1)
+            #power-topic
+            client.publish("power-topic", jsonStr, 1)
     
 #json translation
 def readingsToJson(splitInput, date):
@@ -155,6 +160,21 @@ def mqttListner(input_queue, clientID, topic):
     
     client.disconnect()
 
+#For internal communication between Thread uses the "q" queue
+#Purpouse of this function is to read the messages in the queue and publish it to the topics
+def internalQueueReader(input_queue, clientID):
+    global condition
+    client = connectToMqtt(clientID)
+    client.connect()
+
+    while condition:
+        if not input_queue.empty():
+            data = input_queue.get()
+            splitDecodeInput(data, getDateTime(), client)
+            input_queue.task_done()
+    
+    client.disconnect()
+
 def cliHandler(input_queue):
     global condition
     strInput = str(input())
@@ -165,11 +185,13 @@ def cliHandler(input_queue):
 #End Thread
 
 
-q = Queue()#Todo coud be use for future developments
+q = Queue()
 t1 = Thread(target=serialListner, args=(q, "Client01"))
 t2 = Thread(target=mqttListner, args=(q, "Client02", "publish-topic"))
-t3 = Thread(target=cliHandler, args=(q,))
+t3 = Thread(target=internalQueueReader, args=(q, "Client03"))
+t4 = Thread(target=cliHandler, args=(q,))
 
 t1.start()
 t2.start()
 t3.start()
+t4.start()
