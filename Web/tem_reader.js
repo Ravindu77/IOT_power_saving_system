@@ -27,7 +27,7 @@ console.log('Loaded AWS SDK for JavaScript and AWS IoT SDK for Node.js');
 //
 // Remember our current subscription topic here.
 //
-var currentlySubscribedTopic = 'readings-topic';
+var currentlySubscribedTopic = 'tempChange-topic';
 
 
 //
@@ -124,9 +124,6 @@ window.mqttClientConnectHandler = function() {
    console.log('connect');
    document.getElementById("connecting-div").style.visibility = 'hidden';
    document.getElementById("explorer-div").style.visibility = 'visible';
-   document.getElementById('date-div').innerHTML = '';
-   document.getElementById('temp-div').innerHTML = '';
-   document.getElementById('humid-div').innerHTML = '';
 
    //
    // Subscribe to our current topic.
@@ -158,13 +155,10 @@ window.isUndefined = function(value) {
 window.mqttClientMessageHandler = function(topic, payload) {
    console.log('message: ' + topic + ':' + payload.toString());
    var obj = JSON.parse(payload.toString());
-   var date = obj.date;
-   var temp = obj.temp;
-   var humid = obj.humid;
+   var idealtemp = obj.idealTemp;
 
-   document.getElementById('date-div').innerHTML = date ;
-   document.getElementById('temp-div').innerHTML = temp+'°C' ;
-   document.getElementById('humid-div').innerHTML = humid+'%' ;
+
+   document.getElementById('date-div').value = idealtemp +'°C';
 };
 
 //
@@ -172,9 +166,6 @@ window.mqttClientMessageHandler = function(topic, payload) {
 //
 window.updateSubscriptionTopic = function() {
    var subscribeTopic = document.getElementById('subscribe-topic').value;
-   document.getElementById('date-div').innerHTML = '';
-   document.getElementById('temp-div').innerHTML = '';
-   document.getElementById('humid-div').innerHTML = '';
    mqttClient.unsubscribe(currentlySubscribedTopic);
    currentlySubscribedTopic = subscribeTopic;
    mqttClient.subscribe(currentlySubscribedTopic);
@@ -186,46 +177,7 @@ window.updateSubscriptionTopic = function() {
 window.updatePublishTopic = function() {};
 
 //
-// Handle the UI to update the data we're publishing
-//
-window.updatePublishData = function() {
-   var checked_data = document.getElementById('publish-data').checked;
-   var publishTopic = '';
-   var publishText = '';
 
-	if(checked_data == false){
-		publishTopic = "publish-topic";
-	    publishText = "off";
-	}
-	if(checked_data == true){
-		publishTopic = "publish-topic";
-	    publishText = "on";
-	}
-
-
-   mqttClient.publish(publishTopic, publishText);
-
-};
-
-window.increaseValue = function() {
-  var value = parseInt(document.getElementById('publish-data1').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  document.getElementById('publish-data1').value = value+"°C";
-  mqttClient.publish("publish-topic", value.toString());
-
-
-}
-
-window.decreaseValue = function() {
-  var value = parseInt(document.getElementById('publish-data1').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value < 1 ? value = 1 : '';
-  value--;
-  document.getElementById('publish-data1').value = value+"°C";
-  mqttClient.publish("publish-topic", value.toString());
-
-}
 
 //
 // Install connect/reconnect event handlers.

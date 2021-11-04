@@ -11,9 +11,11 @@
 <link rel="stylesheet" href="dist/app.min.css">
 <link rel="stylesheet" type="text/css" href="example.css">
 <link rel="stylesheet" type="text/css" href="switch.css">
+<link rel="stylesheet" type="text/css" href="form.css">
 <script src="aws-iot-sdk-browser-bundle.js"></script>
 <script src="bundle.js"></script>
 <script src="home.js"></script>
+<script src="tem_reader.js"></script>
 </head>
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -27,8 +29,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </style>
 <body class="w3-black">
 
-<div class="spacer" id="spacer"></div>
-<div class="block" id="connecting-div" style="visibility:visible"></div>
    
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
@@ -48,7 +48,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
     <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-    <a href="#air" class="w3-bar-item w3-button" style="width:25% !important">Temp control</a>
+    <a href="#air" class="w3-bar-item w3-button" style="width:25% !important">Temperature control</a>
   </div>
 </div>
 
@@ -82,8 +82,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </div>
 	
    <!-- On and off button-->
-    <div class="w3-section">
-      <p> <strong>Auto:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="w3-section w3-center w3-stretch">
+	<div id="connecting-div"></div>
+	<div id="explorer-div" style="visibility:hidden">
+      <p class=""> <strong>On/Off</strong>
       <div id="settings-div">
 		
 		 <label class="switch">
@@ -93,21 +95,24 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       </div>
 	    
 	  </p>
-    </div>
+    
     <!-- End of On and off button -->
 	
-    <div class="w3-section">
-      <p> <strong>Increase/decrease:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-	     <button class="w3-button w3-light-grey w3-padding-small" type="submit"> + </button> 
-	     <button class="w3-button w3-light-grey w3-padding-small" type="submit"> - </button> 
-	  </p>
-    </div>
+ 
+    <p> <strong>Current Ideal Temperature</strong>
+
+		 <form>
+
+           <div class="w3-button w3-light-grey w3-padding-medium" id="decrease" onclick="decreaseValue()" value="-">-</div>
+           <input type="text" id="publish-data1" value="25°C" />
+           <div class="w3-button w3-light-grey w3-padding-medium" id="increase" onclick="increaseValue()" value="+">+</div>
+         </form>
+     </div>
+</div>
 	
-	<div id="explorer-div" style="visibility:hidden">
-	     <div id="settings-div">
-         <p><strong>Select your ideal temperature:</strong><input type="text" name="publish-data1" id="publish-data1" placeholder="10-40°C" maxlength="2" size="4" onchange="updatePublishData()" required name=""/></p>
-		 </div> 
-    </div>
+
+	
+
   
 
   <!-- End Air Condition Section -->
@@ -121,6 +126,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   </footer>
 
 <!-- END CONTENTS -->
+
 </div>
 
 

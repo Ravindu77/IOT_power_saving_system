@@ -1,0 +1,32 @@
+form {
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+form #decrease {
+  margin-right: -4px;
+  border-radius: 8px 0 0 8px;
+}
+
+form #increase {
+  margin-left: -4px;
+  border-radius: 0 8px 8px 0;
+}
+
+
+input#publish-data1 {
+  text-align: center;
+  border: none;
+  border-top: 0px solid #ddd;
+  border-bottom: 3px solid #808080;
+  margin: 1px;
+  width: 40px;
+  height: 39px;
+}
+
+input[type=text]::-webkit-inner-spin-button,
+input[type=text]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
