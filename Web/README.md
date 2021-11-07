@@ -19,21 +19,22 @@ Reading data using Json format.
 
 - Subscription topics          
      Topic: "power-topic":
-         eg: {"date": "2021-10-26 17:51:23", "state": "On"}{"date": "2021-10-26 17:51:30", "state": "Off"}
+         eg {"date": "2021-10-26 17:51:23", "state": "On"}{"date": "2021-10-26 17:51:30", "state": "Off"}
 
      Topic: "tempChange-topic"
-         eg: {"date": "2021-10-26 17:52:28", "idealTemp": "27.00"}
+         eg {"date": "2021-10-26 17:52:28", "idealTemp": "27.00"}
 
      Topic: "readings-topic"
-         eg: {"date": "2021-10-26 17:51:25","temp": "25.0", "humid": "51.0"}
+         eg {"date": "2021-10-26 17:51:25","temp": "25.0", "humid": "51.0"}
 
 Sending data using String format.        
 - Publish topic
-Topic: "readings-topic"
-eg: "on", "off", "35"
+     Topic: "readings-topic"
+         eg: "on", "off", "35"
 
 # Web API
 - The web API provides visualisation and controls to/from the edge devices.
-    Toggle switch: turn on/off to the edge devices.
-        
-    Temperture thermostat: to increases and decreases to the edge devices (10-40°C).
+
+     Toggle switch: turn on/off to the edge devices.
+     
+     Temperture thermostat: to increases and decreases to the edge devices (10-40°C).
