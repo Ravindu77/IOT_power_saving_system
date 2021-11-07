@@ -5,7 +5,7 @@
 # AWS IoT conncetion
 - `Certificates`: provides security certificate and keys generated from AWS IoT core.
 
-- `aws-iot-sdk-browser-bundle.js` and `bundle.js`: this package allows to write JavaScript applications which access to AWS IoT Platform via MQTT or MQTT over the Secure WebSocket Protocol.
+- `aws-iot-sdk-browser-bundle.js` and `bundle.js`: these packages allows to write JavaScript applications which access to AWS IoT Platform via MQTT or MQTT over the Secure WebSocket Protocol.
 A new AWS IoT Device SDK is [available] (https://github.com/awslabs/aws-iot-device-sdk-js-v2). 
 
 - `home.js`: this is the actual JavaScript file for connecting to the AWS IoT Platform. Defining topics for publishing and subscribing to/from the service using MQTT protocol. And provides conditional check to the web API.
