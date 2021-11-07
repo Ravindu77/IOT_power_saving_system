@@ -28,8 +28,8 @@ Reading data using Json format.
          eg {"date": "2021-10-26 17:51:25","temp": "25.0", "humid": "51.0"}
 
 Sending data using String format.        
-- Publish topic
-     Topic: "readings-topic":
+- Publish topic  
+        Topic: "readings-topic":
          eg: "on", "off", "35"
 
 # Web API
