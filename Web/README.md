@@ -37,6 +37,6 @@ Sending data using String format.
 # Web API
 - The web API provides visualisation and controls to/from the edge devices.
 
-     #Toggle switch: turn on/off to the edge devices.
+         `Toggle switch`: turn on/off to the edge devices.
      
-     #Temperture thermostat: to increases and decreases to the edge devices (10-40°C).
+         `Temperture thermostat`: to increases and decreases to the edge devices (10-40°C).
