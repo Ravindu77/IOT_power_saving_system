@@ -18,14 +18,14 @@ A new AWS IoT Device SDK is [available] (https://github.com/awslabs/aws-iot-devi
 Reading data using Json format.
 
 - Subscription topics          
-     
-     Topic: "power-topic":
+      
+        Topic: "power-topic":
          eg {"date": "2021-10-26 17:51:23", "state": "On"}{"date": "2021-10-26 17:51:30", "state": "Off"}
 
-     Topic: "tempChange-topic"
+        Topic: "tempChange-topic"
          eg {"date": "2021-10-26 17:52:28", "idealTemp": "27.00"}
 
-     Topic: "readings-topic"
+        Topic: "readings-topic"
          eg {"date": "2021-10-26 17:51:25","temp": "25.0", "humid": "51.0"}
 
 Sending data using String format.        
