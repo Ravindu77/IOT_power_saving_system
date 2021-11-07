@@ -31,7 +31,7 @@ Reading data using Json format.
 Sending data using String format.        
 - Publish topic  
        
-        Topic: "readings-topic":
+        Topic: "publish-topic":
          eg: "on", "off", "35"
 
 # Web API
