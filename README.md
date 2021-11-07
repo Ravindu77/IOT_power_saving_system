@@ -10,7 +10,7 @@
 <h2>sqlConnect (Ravindu)</h2>
     For more information: https://github.com/Ravindu77/IOT_power_saving_system/blob/main/SQL_connector/README.md
 
-<h2>Web (Lee)</h2>
+<h2>Web API (Lee)</h2>
     For more information: https://github.com/Ravindu77/IOT_power_saving_system/blob/main/Web/README.md
 
 <h2>AWS (Heath)</h2>
