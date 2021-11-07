@@ -8,7 +8,7 @@
 - `aws-iot-sdk-browser-bundle.js` and `bundle.js`: these packages allows to write JavaScript applications which access to AWS IoT Platform via MQTT or MQTT over the Secure WebSocket Protocol.
 A new AWS IoT Device SDK is [available] (https://github.com/awslabs/aws-iot-device-sdk-js-v2). 
 
-- `home.js`: this is the actual JavaScript file for connecting to the AWS IoT Platform. Defining topics for publishing and subscribing to/from the service using MQTT protocol. And provides conditional check to the web API.
+- `home.js`: the actual JavaScript file for connecting to the AWS IoT Platform. Defining topics for publishing and subscribing to/from the AWS IoT core using MQTT protocol. And provides conditional checks to the web API.
 
 - `home.html`:  The web API for Power-Saving system in HTML format, sending and receiving data to/from AWS IoT Platform.
 
