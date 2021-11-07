@@ -28,12 +28,12 @@ console.log('Loaded AWS SDK for JavaScript and AWS IoT SDK for Node.js');
 // Remember our current subscription topic here.
 //
 var currentlySubscribedTopic = 'readings-topic';
-
-
+var currentlySubscribedTopic2 = 'tempChange-topic';
+var currentlySubscribedTopic3 = 'power-topic';
 //
 // Create a client id to use when connecting to AWS IoT.
 //
-var clientId = 'mqtt-explorer-' + (Math.floor((Math.random() * 100000) + 1));
+var clientId = 'mqtt-explorer-g3';
 
 //
 // Initialize our configuration.
@@ -132,6 +132,8 @@ window.mqttClientConnectHandler = function() {
    // Subscribe to our current topic.
    //
    mqttClient.subscribe(currentlySubscribedTopic);
+   mqttClient.subscribe(currentlySubscribedTopic2);
+   mqttClient.subscribe(currentlySubscribedTopic3);
 };
 
 //
@@ -150,22 +152,61 @@ window.isUndefined = function(value) {
    return typeof value === 'undefined' || typeof value === null;
 };
 
-
 //
 // Message handler for lifecycle events; create/destroy divs as clients
 // connect/disconnect.
 //
 window.mqttClientMessageHandler = function(topic, payload) {
    console.log('message: ' + topic + ':' + payload.toString());
-   var obj = JSON.parse(payload.toString());
-   var date = obj.date;
-   var temp = obj.temp;
-   var humid = obj.humid;
+   if(topic ==='readings-topic'){
+	  var obj_readings_topic = JSON.parse(payload.toString());
+      var date = obj_readings_topic.date;
+      var temp = obj_readings_topic.temp;
+      var humid = obj_readings_topic.humid;
+	  document.getElementById('date-div').innerHTML = date ;
+	  document.getElementById('temp-div').innerHTML = temp+'°C' ;
+	  document.getElementById('humid-div').innerHTML = humid+'%' ;
+	  if(obj_readings_topic){
+		  document.getElementById('publish-data').checked = true;
+	  }
+	  if(obj_readings_topic == false){
+		  document.getElementById('publish-data').checked = false;
+	  }
+   }
+   if(topic ==='tempChange-topic'){
+	  var obj_tempChange_topic = JSON.parse(payload.toString());
+	  var idealtemp = obj_tempChange_topic.idealTemp;
+	  document.getElementById('publish-data1').value = idealtemp+'°C' ;
+   }
+   if(topic ==='power-topic'){
+	  var obj_power_topic = JSON.parse(payload.toString());
+	  var state = obj_power_topic.state;
+	  if(state==='on'){
+		  document.getElementById('publish-data').checked = true;
+	  }
+	  if(state ==='off'){
+		  document.getElementById('publish-data').checked = false;
+		  document.getElementById('date-div').innerHTML = '';
+		  document.getElementById('temp-div').innerHTML = '';
+		  document.getElementById('humid-div').innerHTML = '';
+	  }
+   }
+  if (obj_readings_topic && obj_tempChange_topic && obj_power_topic) {
+     //do database update or print
+      console.log("----");
+      console.log("obj_readings-topic: %s", obj_readings_topic);
+      console.log("----");
+      console.log("obj_tempChange-topic: %s", obj_tempChange_topic);
+      console.log("----");
+      console.log("obj_power-topic: %s", obj_power_topic);
+      //reset to undefined for next time
+      obj_readings_topic = undefined;
+      obj_tempChange_topic = undefined;
+	  obj_power_topic = undefined;
+  }
 
-   document.getElementById('date-div').innerHTML = date ;
-   document.getElementById('temp-div').innerHTML = temp+'°C' ;
-   document.getElementById('humid-div').innerHTML = humid+'%' ;
 };
+
 
 //
 // Handle the UI for the current topic subscription
@@ -209,21 +250,29 @@ window.updatePublishData = function() {
 
 window.increaseValue = function() {
   var value = parseInt(document.getElementById('publish-data1').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  document.getElementById('publish-data1').value = value+"°C";
-  mqttClient.publish("publish-topic", value.toString());
+  if(value<40){
+     value = isNaN(value) ? 0 : value;
+     value++;
+     document.getElementById('publish-data1').value = value+"°C";
+     mqttClient.publish("publish-topic", value.toString());
+  }else{
+	  document.getElementById('publish-data1').value = "40°C";
+  }
 
 
 }
 
 window.decreaseValue = function() {
   var value = parseInt(document.getElementById('publish-data1').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value < 1 ? value = 1 : '';
-  value--;
-  document.getElementById('publish-data1').value = value+"°C";
-  mqttClient.publish("publish-topic", value.toString());
+  if(value>10){
+	 value = isNaN(value) ? 0 : value;
+     value < 1 ? value = 1 : '';
+     value--;
+     document.getElementById('publish-data1').value = value+"°C";
+     mqttClient.publish("publish-topic", value.toString());
+  }else{
+	  document.getElementById('publish-data1').value = "10°C";
+  }
 
 }
 
